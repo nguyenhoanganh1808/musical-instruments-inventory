@@ -13,6 +13,7 @@ var app = express();
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 const mongoDB =
+  process.env.MONGODB_URI ||
   "mongodb+srv://hoanganh18082003:0978042899@cluster0.jl5dfvf.mongodb.net/musical_intrusments_inventory?retryWrites=true&w=majority&appName=Cluster0";
 
 main().catch((err) => console.log(err));
