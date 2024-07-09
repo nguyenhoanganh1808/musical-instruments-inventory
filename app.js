@@ -7,6 +7,8 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 const catalogRouter = require("./routes/catalog");
+const compression = require("compression");
+const helmet = require("helmet");
 
 var app = express();
 
@@ -20,6 +22,24 @@ main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
 }
+
+const RateLimit = require("express-rate-limit");
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 20,
+});
+// Apply rate limiter to all requests
+app.use(limiter);
+
+app.use(compression()); // Compress all routes
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+    },
+  })
+);
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
