@@ -1,0 +1,31 @@
+extends layout 
+
+block content
+  
+  if category
+    h1 Category: #{category.name}
+    p
+      a(href=category.url + '/update' + '/sercure') Update category
+    p
+      a(href=category.url + '/delete' + '/sercure') Delete category
+  else 
+    h1= title
+  if instrument_list.length
+    .grid-container
+      each val in instrument_list
+        .grid-item
+          a(href=val.url)
+            if val.image != null
+              img(src=val.image, alt=val.name)
+            else
+              img(src='https://media1.s-nbcnews.com/i/streams/2013/August/130808/6C8558749-130808-walter-white-tease.jpg', alt=val.name)
+            h3 #{val.name}
+            p #{val.price_formated}
+            if val.number_in_stock > 0
+              p.text-success Available
+            else
+              p.text-danger Out of stock
+  else
+    p No instruments available.
+
+

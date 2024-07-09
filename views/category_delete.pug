@@ -1,0 +1,29 @@
+extends layout 
+
+block content 
+  h1 Delete Category
+  if instrument_list.length 
+    p #[strong Delete the following instrument before attemping to delete this category.]
+    
+    //- h4 Instruments
+
+    .grid-container
+        each val in instrument_list
+            .grid-item
+                a(href=val.url)
+                    if val.image != null
+                        img(src=val.image, alt=val.name)
+                    else
+                        img(src='https://media1.s-nbcnews.com/i/streams/2013/August/130808/6C8558749-130808-walter-white-tease.jpg', alt=val.name)
+                h3 #{val.name}
+                p #{val.price_formated}
+                if val.number_in_stock > 0
+                    p.text-success Available
+                else
+                    p.text-danger Out of stock
+  else 
+    p Do you relly want to delete this category 
+    form(method='POST')
+      div.form-group 
+        input#categoryid.form-control(type='hidden' name='categoryid', value=category._id)
+        button.btn.btn-primary(type='submit') Delete

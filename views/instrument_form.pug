@@ -1,0 +1,36 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method='POST' enctype='multipart/form-data')
+    div.form-group
+        label(for='name') Name:
+        input#name.form-control(type='text', placeholder='Name of instrument' name='name' required value=(undefined===instrument ? '' : instrument.name) )
+    div.form-group
+        label(for='price') Price:
+        input#price.form-control(type='text' placeHolder='Price' name='price' required value=(undefined===instrument ? '' : instrument.price) ) 
+    div.form-group
+        label(for='price') Number in stock:
+        input#number_in_stock.form-control(type='text' placeHolder='Number in stock' name='number_in_stock' required value=(undefined===instrument ? '' : instrument.number_in_stock) ) 
+    div.form-group
+        label(for='description') Description:
+        textarea#description.form-control(placeholder='Description' name='description' required )=undefined===instrument ? '' : instrument.description
+    div.form-group
+        label Category:
+            div
+                for category in category_list
+                    div(style='display: inline; padding-right:10px;')
+                    if category.checked
+                        input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id, checked)
+                    else
+                        input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id)
+                    label(for=category._id) &nbsp;#{category.name}
+    div.form-group 
+        input#image.form-control(type="file", name="image" require)
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg

@@ -1,0 +1,10 @@
+extends layout 
+
+block content 
+  h1= title 
+  p Do you really want to delete this instrument
+  form(method="POST")
+    div.form_group
+      input#instrumentid.form-control( hidden='true'  name="instrumentid" value=instrument._id)
+      button.btn.btn-primary(type="submit")  Delete
+    

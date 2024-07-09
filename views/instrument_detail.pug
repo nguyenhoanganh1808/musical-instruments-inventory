@@ -1,0 +1,28 @@
+extends layout 
+
+block content
+  h1= title
+  if instrument.image
+    img(src=instrument.image, alt=instrument.name)
+  else
+    img(src='https://media1.s-nbcnews.com/i/streams/2013/August/130808/6C8558749-130808-walter-white-tease.jpg', alt=instrument.name)
+  hr
+  h4 #[strong Name: ] #{instrument.name}
+  p #[strong Price:] #{instrument.price_formated}
+  p #[strong Number in stock:] #{instrument.number_in_stock}
+  p #[strong Description:] #{instrument.description}
+  p #[strong Categories: ]
+    ul
+      each val in instrument.category
+        li 
+          a(href=val.url) #{val.name} 
+  hr
+  p
+    a(href=instrument.url + '/update' + '/sercure') Update Instrument
+  p 
+    a(href=instrument.url + '/delete' + '/sercure') Delete Instrument
+
+    
+
+
+
