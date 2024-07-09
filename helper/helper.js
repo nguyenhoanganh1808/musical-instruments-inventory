@@ -1,15 +1,15 @@
 const cloudinary = require("cloudinary").v2;
-
+require("dotenv").config();
 // Return "https" URLs by setting secure: true
 cloudinary.config({
-  clound_name: "dhbucitr2",
+  cloud_name: "dhbucitr2",
   api_key: process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET,
   secure: true,
 });
 
 // Log the configuration
-
+console.log(cloudinary.config());
 /////////////////////////
 // Uploads an image file
 /////////////////////////
