@@ -15,8 +15,8 @@ block content
       each val in instrument_list
         .grid-item
           a(href=val.url)
-            if val.image != null
-              img(src=val.image, alt=val.name)
+            if val.image
+              img(src=val.image , alt=val.name)
             else
               img(src='https://media1.s-nbcnews.com/i/streams/2013/August/130808/6C8558749-130808-walter-white-tease.jpg', alt=val.name)
             h3 #{val.name}

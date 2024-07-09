@@ -23,22 +23,23 @@ async function main() {
   await mongoose.connect(mongoDB);
 }
 
+// app.use(compression()); // Compress all routes
+
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
+//     },
+//   })
+// );
+
 const RateLimit = require("express-rate-limit");
 const limiter = RateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 20,
 });
 // Apply rate limiter to all requests
-app.use(limiter);
-
-app.use(compression()); // Compress all routes
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      "script-src": ["'self'", "code.jquery.com", "cdn.jsdelivr.net"],
-    },
-  })
-);
+// app.use(limiter);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
